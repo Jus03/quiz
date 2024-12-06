@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/music.css">
+    <link rel="shortcut icon" href="/images/m.jpg" type="image/x-icon">
+    <%- include ('../cdn/bootejs.ejs') -%>
+    <%- include ('../cdn/icon.ejs') -%>
+    <title>Document</title>
+    <style>
+        body {
+            background-color: #f0f2f5; /* Light background for contrast */
+            color: #333; /* Dark text for readability */
+        }
+
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px; 
+            width: 300px; 
+            text-align: center; 
+            background-color: #ffffff; 
+            transition: transform 0.2s; 
+        }
+
+        .card:hover {
+            transform: scale(1.05); 
+        }
+
+        .card-img-top {
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            max-height: 200px; 
+            object-fit: cover; 
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            color: #007bff;
+            margin: 10px 0;
+        }
+
+        .card-text {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 15px; 
+        }
+
+        .audio-container audio {
+            border-radius: 5px;
+            outline: none;
+            width: 100%; 
+            margin-bottom: 10px; 
+        }
+
+        .dropdown {
+            width: 100%; 
+        }
+
+        .btn-secondary {
+            width: 100%; 
+            background-color: #007bff;
+            border: none;
+            color: white; 
+            padding: 10px;
+            transition: background-color 0.3s; 
+        }
+
+        .btn-secondary:hover {
+            background-color: #0056b3; 
+        }
+
+        .dropdown-menu {
+            background-color: #ffffff; 
+            border: 1px solid #007bff; /* Border color */
+            border-radius: 5px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+            padding: 0; 
+            z-index: 1050;
+        }
+
+        .dropdown-item {
+            color: #333; 
+            padding: 10px 15px;
+            transition: background-color 0.3s;
+        }
+
+        .dropdown-item:hover {
+            background-color: #007bff; /* Highlight on hover */
+            color: white; 
+        }
+
+        .btn-danger {
+            margin-top: 10px; /* Space above the button */
+            transition: background-color 0.3s ease; /* Button hover effect */
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333; 
+        }
+        #card-1{
+            margin-bottom: 70px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4">
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                <svg class="bi me-2" width="40" height="32">
+                    <use xlink:href="#bootstrap"></use>
+                </svg>
+                <img src="/images/logo1.png" width="55px" alt="logo" />
+                <span class="fs-4 text-light">Music Life</span>
+            </a>
+
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <a href="/" class="nav-link text-light" aria-current="page"><i class="bi bi-house"></i> Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/quiz" class="nav-link text-light"><i class="bi bi-book"></i> Quiz</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/game" class="nav-link text-light"><i class="bi bi-controller game-icon"></i> Game</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/Music" class="nav-link text-light"><i class="bi bi-music-note-beamed"></i> Music</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/about" class="nav-link text-light"><i class="bi bi-info-circle"></i> About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/myProfile" class="nav-link text-light"><i class="bi bi-person"></i> My Profile</a>
+                </li>
+            </ul>
+        </header>
+    </div>
+
+    <div class="container mt-5 d-flex flex-wrap justify-content-center">
+        
+        <div class="card" id="card-1">
+            <img src="/images/1975.png" class="card-img-top" alt="The 1975">
+            <div class="card-body">
+                <h5 class="card-title">The 1975 Band</h5>
+                <p class="card-text">Being funny in a Foreign Language.</p>
+
+                <div class="dropdown mb-3">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-music-note-beamed"></i> Choose a Track
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" data-src="/music/aboutyou.mp3"><i class="bi bi-music-note-beamed"></i> About You</a></li>
+                        <li><a class="dropdown-item" data-src="/music/itsnotliving.mp3"><i class="bi bi-music-note-beamed"></i> It's Not Living (If It's Not With You)</a></li>
+                        <li><a class="dropdown-item" data-src="/music/Robbers.mp3"><i class="bi bi-music-note-beamed"></i> Robbers</a></li>
+                        <li><a class="dropdown-item" data-src="/music/inlove.mp3"><i class="bi bi-music-note-beamed"></i> I'm In Love With You</a></li>
+                        <li><a class="dropdown-item" data-src="/music/die.mp3"><i class="bi bi-music-note-beamed"></i> I Always Wanna Die</a></li>
+                    </ul>
+                </div>
+
+                <div class="audio-container">
+                    <audio id="audioPlayer1" controls>
+                        <source id="audioSource1" src="" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <a href="https://www.youtube.com/channel/UC_LfW1R3B0of9qOw1uI-QNQ" class="btn btn-danger">More 1975 Music on YouTube</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" id="card-1">
+            <img src="/images/taylor.png" class="card-img-top" alt="Artist 2">
+            <div class="card-body">
+                <h5 class="card-title">Taylor Swift</h5>
+                <p class="card-text">Enjoy the music from this artist.</p>
+
+                <div class="dropdown mb-3">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-music-note-beamed"></i> Choose a Track
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                        <li><a class="dropdown-item" data-src="/music/untouchable.mp3"><i class="bi bi-music-note-beamed"></i> Taylor Swift  Untouchable </a></li>
+                        <li><a class="dropdown-item" data-src="/music/slut.mp3"><i class="bi bi-music-note-beamed"></i> Taylor Swift  Slut </a></li>
+                        <li><a class="dropdown-item" data-src="/music/talk.mp3"><i class="bi bi-music-note-beamed"></i> Taylor Swift  Now That We Dont Talk</a></li>
+                        <li><a class="dropdown-item" data-src="/music/dontgo.mp3"><i class="bi bi-music-note-beamed"></i> Taylor Swift  Say Don't Go</a></li>
+                        <li><a class="dropdown-item" data-src="/music/alltoowell.mp3"><i class="bi bi-music-note-beamed"></i> Taylor Swift  All Too Well</a></li>
+                    </ul>
+                </div>
+
+                <div class="audio-container">
+                    <audio id="audioPlayer2" controls>
+                        <source id="audioSource2" src="" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <a href="https://www.youtube.com/@taylorswift" class="btn btn-danger">More Taylor Music on YouTube</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" id="card-1">
+            <img src="/images/cas1.png" class="card-img-top" alt="Artist 3">
+            <div class="card-body">
+                <h5 class="card-title">Cigarettes After Sex</h5>
+                <p class="card-text">The essential tracks, all in one.</p>
+
+                <div class="dropdown mb-3">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-music-note-beamed"></i> Choose a Track
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
+                        <li><a class="dropdown-item" data-src="/music/apo.mp3"><i class="bi bi-music-note-beamed"></i> Apocalypse Cigarettes After Sex</a></li>
+                        <li><a class="dropdown-item" data-src="/music/sunzets.mp3"><i class="bi bi-music-note-beamed"></i> Sunsetz Cigarettes After Sex</a></li>
+                        <li><a class="dropdown-item" data-src="/music/k.mp3"><i class="bi bi-music-note-beamed"></i> K Cigarettes After Sex</a></li>
+                        <li><a class="dropdown-item" data-src="/music/cry.mp3"><i class="bi bi-music-note-beamed"></i> Cry Cigarettes After Sex</a></li>
+                        <li><a class="dropdown-item" data-src="/music/sweet.mp3"><i class="bi bi-music-note-beamed"></i> Sweet Cigarettes After Sex</a></li>
+                    </ul>
+                </div>
+
+                <div class="audio-container">
+                    <audio id="audioPlayer3" controls>
+                        <source id="audioSource3" src="" type="audio/mpeg">
+                        
+                    </audio>
+                    <a href="https://www.youtube.com/channel/UCqNxhPZoLJ81i5QaK4nqn8A" class="btn btn-danger">More CAS Music on YouTube</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="/images/twice1.png" class="card-img-top" alt="Artist 4">
+            <div class="card-body">
+                <h5 class="card-title">Twice</h5>
+                <p class="card-text">TWICE, the dynamic K-pop girl group known for their catchy hits.</p>
+
+                <div class="dropdown mb-3">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-music-note-beamed"></i> Choose a Track
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton4">
+                        <li><a class="dropdown-item" data-src="/music/knock.mp3"><i class="bi bi-music-note-beamed"></i> TWICE Knock Knock</a></li>
+                        <li><a class="dropdown-item" data-src="/music/stupid.mp3"><i class="bi bi-music-note-beamed"></i> TWICE Crazy Stupid Love</a></li>
+                        <li><a class="dropdown-item" data-src="/music/lookatme.mp3"><i class="bi bi-music-note-beamed"></i> TWICE Look at me</a></li>
+                        <li><a class="dropdown-item" data-src="/music/signal.mp3"><i class="bi bi-music-note-beamed"></i> TWICE Signal </a></li>
+                        <li><a class="dropdown-item" data-src="/music/say.mp3"><i class="bi bi-music-note-beamed"></i> TWICE Say Something</a></li>
+                    </ul>
+                </div>
+
+                <div class="audio-container">
+                    <audio id="audioPlayer4" controls>
+                        <source id="audioSource4" src="" type="audio/mpeg">
+                    </audio>
+                    <a href="https://www.youtube.com/channel/UCzgxx_DM2Dcb9Y1spb9mUJA" class="btn btn-danger">More Twice Music on YouTube</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="/images/w2e.png" class="card-img-top" alt="Artist 5">
+            <div class="card-body">
+                <h5 class="card-title">Wave To Earth</h5>
+                <p class="card-text">0.1 flaws and all.</p>
+
+                <div class="dropdown mb-3">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton5" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-music-note-beamed"></i> Choose a Track
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton5">
+                        <li><a class="dropdown-item" data-src="/music/love.mp3"><i class="bi bi-music-note-beamed"></i> Wave To Earth Love</a></li>
+                        <li><a class="dropdown-item" data-src="/music/bad.mp3"><i class="bi bi-music-note-beamed"></i> Wave To Earth Bad</a></li>
+                        <li><a class="dropdown-item" data-src="/music/daisy.mp3"><i class="bi bi-music-note-beamed"></i> Wave To Earth Daisy</a></li>
+                        <li><a class="dropdown-item" data-src="/music/season.mp3"><i class="bi bi-music-note-beamed"></i> Wave To Earth Season</a></li>
+                        <li><a class="dropdown-item" data-src="/music/sunny.mp3"><i class="bi bi-music-note-beamed"></i> Wave To Earth Sunny days</a></li>
+                    </ul>
+                </div>
+
+                <div class="audio-container">
+                    <audio id="audioPlayer5" controls>
+                        <source id="audioSource5" src="" type="audio/mpeg">
+                    </audio>
+                    <a href="https://www.youtube.com/channel/UCBJNpcJaUcVyw4LlqGRMpcQ" class="btn btn-danger">More W2E Music on YouTube</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="/images/1D.png" class="card-img-top" alt="Artist 6">
+            <div class="card-body">
+                <h5 class="card-title">One Direction</h5>
+                <p class="card-text">the iconic boy band that stole hearts around the globe!.</p>
+
+                <div class="dropdown mb-3">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton6" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-music-note-beamed"></i> Choose a Track
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton6">
+                        <li><a class="dropdown-item" data-src="/music/little.mp3"><i class="bi bi-music-note-beamed"></i> One Direction Little Things</a></li>
+                        <li><a class="dropdown-item" data-src="/music/Strong.mp3"><i class="bi bi-music-note-beamed"></i> One Direction Strong</a></li>
+                        <li><a class="dropdown-item" data-src="/music/about.mp3"><i class="bi bi-music-note-beamed"></i> One Direction They Dont Know About Us</a></li>
+                        <li><a class="dropdown-item" data-src="/music/you.mp3"><i class="bi bi-music-note-beamed"></i> One Direction  You & I</a></li>
+                        <li><a class="dropdown-item" data-src="/music/18.mp3"><i class="bi bi-music-note-beamed"></i> One Direction 18 </a></li>
+
+                    </ul>
+                </div>
+
+                <div class="audio-container">
+                    <audio id="audioPlayer6" controls>
+                        <source id="audioSource6" src="" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <a href="https://www.youtube.com/@artist6" class="btn btn-danger">More Artist 6 Music on YouTube</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // JavaScript to handle changing the audio source based on dropdown selection
+const dropdowns = [1, 2, 3, 4, 5,6]; // Ensure to include all dropdowns
+dropdowns.forEach((num) => {
+    const audioPlayer = document.getElementById(`audioPlayer${num}`);
+    const audioSource = document.getElementById(`audioSource${num}`);
+    const dropdownButton = document.getElementById(`dropdownMenuButton${num}`);
+    const dropdownItems = document.querySelectorAll(`#dropdownMenuButton${num} ~ .dropdown-menu .dropdown-item`);
+
+    dropdownItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const newSrc = this.getAttribute('data-src');
+            const songName = this.textContent; // Get the song name
+
+            audioSource.src = newSrc;
+            audioPlayer.load(); // Reload the audio player with the new source
+            audioPlayer.play(); // Optionally play the audio automatically
+            
+            // Set button text to selected song name
+            dropdownButton.innerHTML = `<i class="bi bi-music-note-beamed"></i> ${songName}`;
+            
+        });
+    });
+});
+
+    </script>
+    <%- include ('../cdn/js.ejs') -%>
+</body>
+</html>

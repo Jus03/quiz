@@ -1,0 +1,51 @@
+body{
+    background: url(/images/new2.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+#questionDisplay{
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255,255,255,0), rgba(255,255,255,0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.18);
+    box-shadow: 0 8px 32px 0 rgba(255,255,255,0.38);
+}
+#questionCount{
+    background: linear-gradient(135deg, rgba(255,255,255,0), rgba(255,255,255,0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.18);
+    box-shadow: 0 8px 32px 0 rgba(255,255,255,0.38);
+    color: white;
+}
+.question{
+    background: linear-gradient(135deg, rgba(255,255,255,0), rgba(255,255,255,0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.18);
+    box-shadow: 0 8px 32px 0 rgba(255,255,255,0.38);
+    color: white;
+    padding: 5px;
+    text-align: center;
+}
+#get-btn{
+    width: 25rem;   
+}
+#timeLimit{
+    background: linear-gradient(135deg, rgba(255,255,255,0), rgba(255,255,255,0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.18);
+    box-shadow: 0 8px 32px 0 rgba(255,255,255,0.38);
+    color: white;
+    padding: 5px;
+    text-align: center;
+}

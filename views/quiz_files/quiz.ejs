@@ -1,0 +1,363 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Music Quiz</title>
+        <link rel="stylesheet" href="/stylesheets/style.css" />
+        <link rel="stylesheet" href="/stylesheets/quiz.css" />
+        <link rel="shortcut icon" href="images/m.jpg" type="image/x-icon">
+        <%- include('../cdn/bootejs.ejs') -%>
+        <%- include('../cdn/icon.ejs') -%>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <style>
+            #myBtn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: red;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 4px;
+    }
+    ​
+    #myBtn:hover {
+    background-color: #555;
+    }
+            .question-container {
+                border: 1px solid rgba(255, 255, 255, 0.18);
+                border-radius: 5px;
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+            .answer-choice {
+                width: 100%;
+                margin: 5px 0;
+                text-align: left;
+            }
+            .answer-choice.selected {
+                background-color: #007bff;
+                color: white;
+            }
+            .answer-choice.correct {
+            background-color: #4caf50 !important; /* Updated to a green shade */
+            color: white;
+            border: 2px solid #2e7d32; /* Darker green border */
+            }
+            .answer-choice.wrong {
+            background-color: #f44336 !important; /* Updated to a red shade */
+            color: white;
+            border: 2px solid #c62828; /* Darker red border */
+        }
+        
+            .answer-choice.disabled {
+                background-color: #d3d3d3; /* Gray color for disabled buttons */
+                color: #6c757d; /* Darker gray for text */
+            }
+        
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <header class="d-flex flex-wrap justify-content-center py-3 mb-42">
+                <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                    <img src="/images/logo1.png" width="55px" alt="logo" />
+                    <span class="fs-4 text-light">Music Life</span>
+                </a>
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a href="/" class="nav-link text-light"><i class="bi bi-house"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/quiz" class="nav-link text-light"><i class="bi bi-question-diamond"></i> Quiz</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/leaderboard" class="nav-link text-light"><i class="bi bi-controller game-icon"></i> Game</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Music" class="nav-link text-light"><i class="bi bi-music-note-beamed"></i> Music</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/about" class="nav-link text-dark"><i class="bi bi-info-circle"></i> About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/myProfile" class="nav-link text-light"><i class="bi bi-person"></i> My Profile</a>
+                    </li>
+                </ul>
+            </header>
+
+            <h1 class="text-center text-light " style="font-size: 60px; font-family: 'Courier New', Courier, monospace;">Music Quiz</h1>
+      
+            
+                    
+
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-6 mb-3 text-center">
+                        <div class="position-relative w-75 mx-auto">
+                            <select id="questionCount" class="form-select text-light text-center ">
+                                <option value="10" class="text-dark bg-info text-center">10 Questions</option>
+                                <option value="20" class="text-dark bg-info text-center">20 Questions</option>
+                                <option value="30" class="text-dark bg-info text-center">30 Questions</option>
+                                <option value="40" class="text-dark bg-info text-center">40 Questions</option>
+                                <option value="50" class="text-dark bg-info text-center">50 Questions</option>
+                            </select>
+                                <span class="dropdown-icon position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%);" onclick="toggleDropdown(event)">▼</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row justify-content-center">
+                <div class="col-md-6 mb-3 text-center">
+                    <div class="position-relative">
+                        <select id="timeLimit" class="form-select w-75 mx-auto">
+                            <option value="300" class="text-dark bg-info text-center">5 Minutes</option>
+                            <option value="600" class="text-dark bg-info text-center">10 Minutes</option>
+                            <option value="900" class="text-dark bg-info text-center">15 Minutes</option>
+                            <option value="1500" class="text-dark bg-info text-center">25 Minutes</option>
+                        </select>
+                        <span class="dropdown-icon position-absolute" style=" right: 0; left: 23.5rem; top: 50%; transform: translateY(-50%);" onclick="toggleDropdown(event)">▼</span>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+            <div class="container" id="get-btn">
+            
+                <div class="row d-flex justify-content-center">
+                    <button id="getQuestionsBtn" class="question  mb-3">Start the Quiz</button>
+            </div>
+        </div>
+
+    
+    <div id="timeLeft" class="text-light text-center fixed-top" style="font-size: 24px;"></div>
+
+            <div id="questionDisplay" class="mt-4"></div>
+        </div>
+       
+        
+        
+        <button id="myBtn" onclick="topFunction()">
+            <i class="fas fa-chevron-up"></i>
+        </button>
+        <%- include('../cdn/js.ejs') -%>
+    <!-- Removed the form submission part, relying on fetch -->
+<button id="myBtn" onclick="topFunction()">
+    <i class="fas fa-chevron-up"></i>
+</button>
+<%- include('../cdn/js.ejs') -%>
+
+<script>
+    let score = 0; // Initialize score variable
+    let totalQuestions = 0;
+    let answeredQuestions = 0; 
+    let timer; // Variable to store the timer
+    let timeLeft; // Time left variable
+    let isTimerRunning = false;
+
+    let mybutton = document.getElementById("myBtn");
+
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+        }
+    }
+
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+
+    function formatTime(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = seconds % 60;
+        return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+    }
+
+    function startTimer() {
+        if (isTimerRunning) return;
+
+        timeLeft = parseInt(document.getElementById('timeLimit').value);
+        document.getElementById('timeLeft').textContent = formatTime(timeLeft); 
+
+        isTimerRunning = true; 
+
+        timer = setInterval(() => {
+            timeLeft--; 
+            document.getElementById('timeLeft').textContent = formatTime(timeLeft); 
+
+            if (timeLeft <= 0) {
+                clearInterval(timer); 
+                isTimerRunning = false; 
+                alert(`Time's up! `); 
+                endQuiz();
+            }
+        }, 1000); 
+    }
+
+    async function endQuiz() {
+        const username = "<%= user ? user.username : 'Guest' %>";
+const email = "<%= user ? user.email : 'N/A' %>";
+const score = "<%= user ? user.score : 0 %>";
+const duration = "<%= user ? user.duration : 0 %>";
+
+        try {
+            const response = await fetch('/leaderboards/submit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, email, score, duration })
+            });
+
+            const result = await response.json();
+            if (response.ok) {
+                console.log(result.message);
+            } else {
+                console.error(result.message);
+            }
+        } catch (error) {
+            console.error('Error submitting score:', error);
+        }
+
+        window.location.href = '/leaderboards';
+    }
+
+    document.getElementById('getQuestionsBtn').addEventListener('click', async function () {
+        if (isTimerRunning) {
+            clearInterval(timer); 
+            isTimerRunning = false; 
+        }
+
+        const selectedCount = document.getElementById('questionCount').value; 
+        try {
+            const response = await fetch(`/quiz/get-questions?amount=${selectedCount}`); 
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const questions = await response.json(); 
+            if (questions.length === 0) {
+                throw new Error('No questions found.');
+            }
+
+            totalQuestions = questions.length; 
+            score = 0; 
+            answeredQuestions = 0; 
+            displayQuestions(questions); 
+            startTimer(); 
+            document.getElementById('questionDisplay').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        } catch (error) {
+            console.error('Error fetching questions:', error);
+            document.getElementById('questionDisplay').innerHTML = 'Failed to load questions.';
+        }
+    });
+
+    function displayQuestions(questions) {
+        const questionDisplay = document.getElementById('questionDisplay');
+        questionDisplay.innerHTML = ''; 
+
+        questions.forEach((question, index) => {
+            const allAnswers = [...question.incorrect_answers, question.correct_answer].sort(() => Math.random() - 0.5);
+            
+            const letteredAnswers = allAnswers.map((answer, i) => {
+                const letter = String.fromCharCode(65 + i); 
+                return `
+                    <li>
+                        <button class="btn text-light answer-choice" data-letter="${letter}" data-answer="${answer}">
+                            ${letter}) ${answer}
+                        </button>
+                    </li>
+                `;
+            }).join(''); 
+
+            questionDisplay.innerHTML += `
+                <div class="question-container">
+                    <h4 class="text-light">${index + 1}. ${question.question}</h4>
+                    <ul class="list-unstyled">
+                        ${letteredAnswers}
+                    </ul>
+                    <button class="btn btn-success btn-check-answer" data-correct="${question.correct_answer}" data-all-answers='${JSON.stringify(allAnswers)}'>Check Answer</button>
+                    <div class="answerFeedback"></div>
+                </div>
+            `;
+        });
+
+        document.querySelectorAll('.answer-choice').forEach(button => {
+            button.addEventListener('click', () => {
+                const questionContainer = button.closest('.question-container');
+                const allButtons = questionContainer.querySelectorAll('.answer-choice');
+
+                allButtons.forEach(btn => {
+                    btn.classList.remove('selected');
+                });
+                button.classList.add('selected');
+            });
+        });
+
+        document.querySelectorAll('.btn-check-answer').forEach(button => {
+            button.addEventListener('click', () => {
+                const questionContainer = button.closest('.question-container');
+                const selectedButton = questionContainer.querySelector('.selected');
+
+                if (!selectedButton) {
+                    alert('Please select an answer before checking.');
+                    return;
+                }
+
+                const selectedAnswer = selectedButton.dataset.answer;
+                const correctAnswer = button.dataset.correct;
+                const answerFeedback = questionContainer.querySelector('.answerFeedback');
+                const allButtons = questionContainer.querySelectorAll('.answer-choice');
+
+                if (selectedAnswer === correctAnswer) {
+                    answerFeedback.textContent = `Correct! Your total score is ${score + 1}/${totalQuestions}`;
+                    answerFeedback.style.color = "#4caf50";
+                    score++;
+                    selectedButton.classList.add('correct');
+                } else {
+                    answerFeedback.textContent = `Wrong! The correct answer was: ${correctAnswer}. Your total score is ${score}/${totalQuestions}`;
+                    answerFeedback.style.color = "#f44336";
+                    selectedButton.classList.add('wrong');
+
+                    Array.from(allButtons).forEach(btn => {
+                        if (btn.dataset.answer === correctAnswer) {
+                            btn.classList.add('correct');
+                        }
+                    });
+                }
+
+                allButtons.forEach(btn => {
+                    btn.classList.add('disabled');
+                    btn.setAttribute('disabled', true);
+                });
+
+                button.setAttribute('disabled', true);
+
+                answeredQuestions++;
+
+                if (answeredQuestions === totalQuestions) {
+                    endQuiz();
+                    clearInterval(timer); 
+                    answerFeedback.innerHTML = `<div class="alert alert-info">Quiz ended! Your score is ${score}/${totalQuestions}</div>`;
+                }
+            });
+        });
+    }
+</script>
+
+    
+    </body>
+    </html>

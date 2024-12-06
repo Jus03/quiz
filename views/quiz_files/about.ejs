@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/about.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <%- include ('../cdn/icon.ejs') -%>
+    <%- include ('../cdn/bootejs.ejs') -%>
+    <title>Music History</title>
+
+    <style>
+        body {
+            background-color: #f8f9fa; 
+            font-family: 'Arial', sans-serif;
+        }
+
+        .header {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #1b7fe2; 
+        }
+
+        .header p.lead {
+            font-size: 1.25rem;
+            color: #d3d6d8; 
+        }
+
+        .history-section {
+            margin: 40px 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: #ff00ea; 
+            margin-bottom: 20px;
+        }
+
+        .card {
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .card img {
+            max-width: 100%; 
+            border-radius: 5px 5px 0 0; 
+        }
+
+        .card-title {
+            font-weight: bold;
+        }
+
+        .period-title {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: #495057; 
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .side-by-side {
+                flex-direction: column;
+            }
+        }
+
+        .nav-link {
+            color: #ffffff; 
+        }
+
+        .nav-link:hover {
+            color: #adb5bd; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4">
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                <img src="/images/logo1.png" width="55px" alt="logo" />
+                <span class="fs-4 text-light">Music Life</span>
+            </a>
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <a href="/" class="nav-link text-light"><i class="bi bi-house"></i> Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/quiz" class="nav-link text-light"><i class="bi bi-book"></i> Quiz</a>
+                </li>
+               <li class="nav-item">
+                    <a href="/game" class="nav-link text-light"><i class="bi bi-controller game-icon"></i> Game</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/Music" class="nav-link text-light"><i class="bi bi-music-note-beamed"></i> Music</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/about" class="nav-link text-light"><i class="bi bi-info-circle"></i> About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/myProfile" class="nav-link text-light"><i class="bi bi-person"></i> My Profile</a>
+                </li>
+            </ul>
+        </header>
+
+        <div class="header">
+            <h1>History of Music</h1>
+            <p class="lead">A Journey Through Time</p>
+        </div>
+
+        <div class="container mt-5">
+            <section class="history-section">
+                <h2 class="section-title">Prehistoric & Medieval Music</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card" data-aos="fade-right">
+                            <img src="/images/pre.png" alt="Prehistoric Music" class="card-img-top" />
+                            <div class="card-body">
+                                <p class="period-title">Prehistoric Music</p>
+                                <p>Music in its earliest form was tied to rituals and communication. Simple instruments like bone flutes and drums were used by ancient civilizations, with music playing a vital role in religious and social life.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card" data-aos="fade-left">
+                            <img src="/images/medi.png" alt="Medieval Music" height="306px" class="card-img-top" />
+                            <div class="card-body">
+                                <p class="period-title">Medieval Music (500–1400)</p>
+                                <p>The Medieval period saw the rise of sacred music like Gregorian chant, characterized by monophonic melodies. Secular music was popularized by minstrels and troubadours, and music notation began to emerge, allowing compositions to be recorded.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="history-section">
+                <h2 class="section-title">Renaissance & Baroque Music</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card" data-aos="fade-right">
+                            <img src="/images/ren.jpg" height="377px" alt="Renaissance Music" class="card-img-top" />
+                            <div class="card-body">
+                                <p class="period-title">Renaissance Music (1400–1600)</p>
+                                <p>Polyphonic music became popular during the Renaissance, with multiple melodic lines interwoven. Composers like Palestrina elevated sacred music, and instruments like the lute and harpsichord gained prominence.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card" data-aos="fade-left">
+                            <img src="/images/bar.webp" height="400px" alt="Baroque Music" class="card-img-top" />
+                            <div class="card-body">
+                                <p class="period-title">Baroque Music (1600–1750)</p>
+                                <p>The Baroque era featured elaborate and expressive music. Composers like Bach and Handel developed complex forms like fugues and concertos, while opera gained popularity.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="history-section">
+                <h2 class="section-title">Classical & Romantic Music</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card" data-aos="fade-right">
+                            <img src="/images/clas.jpg" alt="Classical Music" class="card-img-top" />
+                            <div class="card-body">
+                                <p class="period-title">Classical Music (1750–1820)</p>
+                                <p>Composers such as Mozart and Haydn brought clarity and balance to music, refining forms like the symphony and sonata. Public concerts became common, allowing music to reach a wider audience.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card" data-aos="fade-left">
+                            <img src="/images/roman.png" height="328px" alt="Romantic Music" class="card-img-top" />
+                            <div class="card-body">
+                                <p class="period-title">Romantic Music (1820–1900)</p>
+                                <p>Romantic music emphasized emotion and individual expression. Composers like Tchaikovsky and Schubert composed deeply personal works, while orchestras expanded in size and program music became popular.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="history-section">
+                <h2 class="section-title">20th & 21st Century Music</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card" data-aos="fade-right">
+                            <img src="/images/abente.jpg" alt="20th Century Music" class="card-img-top" />
+                            <div class="card-body">
+                                <p class="period-title">20th Century Music</p>
+                                <p>The 20th century saw the rise of diverse musical styles, from jazz and rock to electronic music. Innovations in technology transformed music production, and new genres emerged.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card" data-aos="fade-left">
+                            <img src="/images/basta.png" height="358px" alt="21st Century Music" class="card-img-top" />
+                            <div class="card-body">
+                                <p class="period-title">21st Century Music</p>
+                                <p>In the 21st century, music continues to evolve with globalization and technology. Genres blend and new forms of distribution change how music is consumed, making it more accessible than ever.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+   
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1200, 
+        });
+    </script>
+</body>
+</html>

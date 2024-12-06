@@ -1,0 +1,48 @@
+/* Answer choice button styles */
+.answer-choice {
+    width: 100% !important; /* Make buttons full width */
+    background-color: #007bff; /* Button color */
+    border: none; /* Remove border */
+    color: white; /* Text color */
+    padding: 15px; /* Increased padding for better touch target */
+    margin: 5px 0; /* Margin around buttons */
+    border-radius: 8px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-weight: 500; /* Slightly bolder font */
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+}
+
+/* Hover effect for answer choice buttons */
+.answer-choice:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+    transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+/* Styles for selected answer button */
+.selected {
+    background-color: #ffc107; /* Highlight selected button in yellow */
+    border: 2px solid #ffd700; /* Add a border for emphasis */
+    color: black; /* Change text color for visibility */
+}
+
+/* Correct answer button styles */
+.correct {
+    background-color: #4caf50 !important; /* Green color for correct answer */
+    border-color: #4caf50 !important;
+    color: white;
+}
+
+/* Wrong answer button styles */
+.wrong {
+    background-color: #f44336 !important; /* Red color for wrong answer */
+    border-color: #f44336 !important;
+    color: white;
+}
+
+/* Disabled button styles */
+.disabled {
+    cursor: not-allowed; /* Disable pointer events */
+    opacity: 0.6; /* Dim the appearance of disabled buttons */
+    box-shadow: none; /* Remove shadow for disabled buttons */
+}

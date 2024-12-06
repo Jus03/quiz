@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Music Life </title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/bg.css" />
+    <link rel="shortcut icon" href="images/m.jpg" type="image/x-icon">
+    <%- include ('cdn/icon.ejs') -%>
+    <%- include ('cdn/bootejs.ejs') -%>
+  </head>
+  <style>
+  
+</style>
+  <body>
+    <div class="container">
+      <header class="d-flex flex-wrap justify-content-center py-3 mb-4">
+        <a
+          href="/"
+          class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
+        >
+          <svg class="bi me-2" width="40" height="32">
+            <use xlink:href="#bootstrap"></use>
+          </svg>
+          <img src="/images/logo1.png" width="55px" alt="logo" />
+          <span class="fs-4 text-light">Music Life</span>
+        </a>
+    
+        <ul class="nav nav-pills">
+          <li class="nav-item">
+            <a href="/" class="nav-link text-light" aria-current="page">
+              <i class="bi bi-house"></i> Home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/quiz" class="nav-link text-light">
+              <i class="bi bi-book"></i> Quiz
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/leaderboard" class="nav-link text-light">
+              <i class="bi bi-controller game-icon"></i> Leaderboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/Music" class="nav-link text-light">
+              <i class="bi bi-music-note-beamed"></i> Music
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/about" class="nav-link text-light">
+              <i class="bi bi-info-circle"></i> About
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/myProfile" class="nav-link text-light">
+              <i class="bi bi-person"></i> My Profile
+            </a>
+          </li>
+          <!-- Login and Sign Up Links -->
+          <li class="nav-item">
+            <a href="/login" class="nav-link text-light">
+              <i class="bi bi-box-arrow-in-right"></i> Login
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/logout" class="nav-link btn btn-outline-light ms-2">
+              Sign Up
+            </a>
+          </li>
+        </ul>
+      </header>
+    </div>
+    
+
+    <div class="container col-xl-10 col-xxl-8 px-4 py-5" id="section">
+      <div class="row align-items-center g-lg-5 py-5">
+        <div class="col-lg-7 text-center text-lg-start">
+          <h1 class="display-4 fw-bold lh-1 text-light mb-3">
+            Start your musical journey with Music Life
+          </h1>
+          <p class="col-lg-10 fs-4 text-light">
+            Welcome to Music Life, your ultimate destination for enjoying music
+            every single day. Whether you're looking to unwind after a long day,
+            get energized for a workout, or simply explore new sounds, we have
+            something for everyone. With our diverse collection of playlists and
+            the latest hits, you’ll always find the perfect soundtrack to
+            accompany your moments.
+          </p>
+        </div>
+        <div class="col-md-10 mx-auto col-lg-5">
+          <img src="/images/r.png" class="card-img-top" alt="picture" />
+        </div>
+      </div>
+    </div>
+
+    <%- include ('cdn/js.ejs') -%>
+  </body>
+</html>

@@ -1,0 +1,99 @@
+body{
+    background: url(/images/about.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: sans-serif;
+   
+}
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #343a40;
+    animation: colorChange 3s infinite;
+  }
+  @keyframes colorChange {
+    0% {
+        color: #ff6347;
+    }
+    50% {
+        color: #dd8e33;
+    }
+    100% {
+        color: #ff6347;
+    }
+}
+  .history-section {
+    background: linear-gradient(135deg, rgba(255,255,255,0), rgba(255,255,255,0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.18);
+    box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37);
+
+    padding: 40px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    opacity: 0.85;
+  }
+  .period-title {
+    font-size: 1.5rem;
+    color: #6c757d;
+  }
+  .side-by-side {
+    display: flex;
+    justify-content: space-between;
+  }
+  .side-by-side div {
+    flex: 1;
+    margin-right: 20px;
+  }
+  .side-by-side div:last-child {
+    margin-right: 0;
+  }
+  .header {
+    text-align: center;
+    background: linear-gradient(135deg, rgba(255,255,255,0), rgba(255,255,255,0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.18);
+    box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37);
+    color: white;
+    padding: 50px 0;
+  }
+  .header h1 {
+    font-size: 3rem;
+  }
+/*
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #fff;
+  }
+  .history-section {
+    background-color: #523434;
+    padding: 40px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  .history-section:nth-child(odd) {
+    background-color: #6eb0f3;
+  }
+  .header {
+    text-align: center;
+    background-color: #856c28;
+    color: white;
+    padding: 50px 0;
+  }
+  .header h1 {
+    font-size: 3rem;
+  }
+  .period-title {
+    font-size: 1.5rem;
+    color: #4e606e;
+  }
+

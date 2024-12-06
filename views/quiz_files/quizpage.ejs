@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Page</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/quiz.css" />
+    <link rel="shortcut icon" href="images/m.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <style>
+        .question-container {
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .answer-choice {
+            width: 100%;
+            margin: 5px 0;
+            text-align: left;
+        }
+        .answer-choice.selected {
+            background-color: #007bff;
+            color: white;
+        }
+        .answer-choice.correct {
+            background-color: #4caf50 !important;
+            color: white;
+            border: 2px solid #2e7d32;
+        }
+        .answer-choice.wrong {
+            background-color: #f44336 !important;
+            color: white;
+            border: 2px solid #c62828;
+        }
+        #checkAnswer {
+            display: none; /* Initially hidden */
+        }
+        .feedback {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+        .correct-feedback {
+            color: green;
+        }
+        .wrong-feedback {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+        <div id="questionDisplay" class="mt-4"></div>
+        <div id="timeLeft" class="text-light text-center" style="font-size: 24px;"></div>
+        <button id="startQuiz" class="btn btn-primary mt-3">Start Quiz</button>
+        <button id="checkAnswer" class="btn btn-success mt-3" disabled>Check Answer</button>
+        <div id="feedback" class="feedback"></div>
+    
+
+    <script>
+        let score = 0;
+        let totalQuestions = 0;
+        let currentQuestionIndex = 0;
+        let questions = []; // Store fetched questions
+        let timer;
+        let timeLeft;
+        let isTimerRunning = false;
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = seconds % 60; 
+            return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+        }
+
+        function startTimer() {
+            if (isTimerRunning) return;
+
+            timeLeft = 60; // Set the time limit in seconds
+            document.getElementById('timeLeft').textContent = formatTime(timeLeft); 
+
+            isTimerRunning = true;
+
+            timer = setInterval(() => {
+                timeLeft--; 
+                document.getElementById('timeLeft').textContent = formatTime(timeLeft); 
+
+                if (timeLeft <= 0) { 
+                    clearInterval(timer);
+                    isTimerRunning = false; 
+                    alert(`Time's up! Your score: ${score}/${totalQuestions}`);
+                    endQuiz();
+                }
+            }, 1000); 
+        }
+
+        function endQuiz() {
+            clearInterval(timer); 
+            isTimerRunning = false;   
+            document.getElementById('questionDisplay').innerHTML = `<h3 class="text-light">Quiz finished! Your score: ${score}/${totalQuestions}</h3>`;
+            document.getElementById('feedback').innerHTML = ''; // Clear feedback
+        }
+
+        async function fetchQuestions() {
+            try {
+                const response = await fetch('https://opentdb.com/api.php?amount=10&category=12&difficulty=medium&type=multiple');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const data = await response.json();
+                return data.results; 
+            } catch (error) {
+                console.error('Error retrieving data from OpenTDB:', error);
+                alert('Error retrieving data from OpenTDB. Please try again later.');
+                return [];
+            }
+        }
+
+        async function displayQuestions() {
+            const questionDisplay = document.getElementById('questionDisplay');
+            questionDisplay.innerHTML = ''; 
+            totalQuestions = questions.length;
+
+            const question = questions[currentQuestionIndex];
+            const allAnswers = [...question.incorrect_answers, question.correct_answer].sort(() => Math.random() - 0.5);
+            
+            const letteredAnswers = allAnswers.map((answer, i) => {
+                const letter = String.fromCharCode(65 + i);
+                return `
+                    <li>
+                        <button class="btn text-light answer-choice" data-letter="${letter}" data-answer="${answer}">
+                            ${letter}) ${answer}
+                        </button>
+                    </li>
+                `;
+            }).join('');
+
+            questionDisplay.innerHTML = `
+                <div class="question-container">
+                    <h4 class="text-light">${currentQuestionIndex + 1}. ${question.question}</h4>
+                    <ul class="list-unstyled">
+                        ${letteredAnswers}
+                    </ul>
+                </div>
+            `;
+
+            document.getElementById('checkAnswer').style.display = 'inline-block'; // Show the check answer button
+            document.getElementById('feedback').innerHTML = ''; // Clear previous feedback
+            startTimer();
+
+            // Add click event to answer choices
+            document.querySelectorAll('.answer-choice').forEach(button => {
+                button.addEventListener('click', function() {
+                    if (!this.classList.contains('selected')) {
+                        this.classList.add('selected'); // Highlight selected answer
+                        // Disable only the current question's answer choices
+                        document.querySelectorAll('.answer-choice').forEach(b => b.disabled = true);
+                        document.getElementById('checkAnswer').disabled = false; // Enable check answer button
+                    }
+                });
+            });
+        }
+
+        document.getElementById('startQuiz').addEventListener('click', async () => {
+            questions = await fetchQuestions();
+            displayQuestions();
+        });
+
+        document.getElementById('checkAnswer').addEventListener('click', async () => {
+            // Get the selected answer
+            const selectedAnswer = document.querySelector('.answer-choice.selected');
+            if (!selectedAnswer) {
+                alert('Please select an answer first.'); // Alert if no answer selected
+                return;
+            }
+
+            // Check the answer
+            const correctAnswerText = questions[currentQuestionIndex].correct_answer;
+
+            if (selectedAnswer.dataset.answer === correctAnswerText) {
+                selectedAnswer.classList.add('correct'); // Highlight correct answer
+                score++;
+                document.getElementById('feedback').innerHTML = `<span class="correct-feedback">Correct! Your score: ${score}/${totalQuestions}</span>`;
+            } else {
+                selectedAnswer.classList.add('wrong'); // Highlight wrong answer
+                document.getElementById('feedback').innerHTML = `<span class="wrong-feedback">Wrong! The correct answer is: ${correctAnswerText}. Your score: ${score}/${totalQuestions}</span>`;
+            }
+
+            // Disable the check answer button
+            document.getElementById('checkAnswer').disabled = true;
+
+            // Move to the next question
+            currentQuestionIndex++;
+
+            // Check if there are more questions
+            if (currentQuestionIndex < totalQuestions) {
+                displayQuestions();
+            } else {
+                endQuiz();
+            }
+        });
+    </script>
+</body>
+</html>
